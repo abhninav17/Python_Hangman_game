@@ -1,5 +1,4 @@
-#HANGMAN IS A GAME SELECTS WORDS FROM A LIST,DISPLAYS AS UNDERSCORE WHICH REPRESENTS LETTER AND PROMPT
-# USER UNTIL THRY EITHER GUESS LETTERS UNTIL THEY EITHER GUESS THE WORD OR RAN OUT OF ATTEMPTS
+
 
 
 
@@ -9,7 +8,7 @@ from words import word_list
 
 def get_word():
     word = random.choice(word_list)
-    return word.upper()                   #which used to return a random word from word_list
+    return word.upper()                  
 
 
 def play(word):
@@ -22,9 +21,9 @@ def play(word):
     print(display_hangman(tries))
     print(word_completion)
     print("\n")
-    while not guessed and tries > 0:                             #while not =while false
+    while not guessed and tries > 0:                             
         guess = input("Please guess a letter or word: ").upper()
-        if len(guess) == 1 and guess.isalpha():                  #1 if user input a letter
+        if len(guess) == 1 and guess.isalpha():                  
             if guess in guessed_letters:
                 print("You already guessed the letter", guess)
             elif guess not in word:
@@ -34,14 +33,14 @@ def play(word):
             else:
                 print("Good job,", guess, "is in the word!")
                 guessed_letters.append(guess)
-                word_as_list = list(word_completion)           #all the indices occurs in a word
+                word_as_list = list(word_completion)          
                 indices = [i for i, letter in enumerate(word) if letter == guess]
-                for index in indices:                          # numerate used to track the no of iteration function
+                for index in indices:                         
                     word_as_list[index] = guess
-                word_completion = "".join(word_as_list)        # convert it back to string
+                word_completion = "".join(word_as_list)       
                 if "_" not in word_completion:
                     guessed = True
-        elif len(guess) == len(word) and guess.isalpha():      #if user input the word
+        elif len(guess) == len(word) and guess.isalpha():     
             if guess in guessed_words:
                 print("You already guessed the word", guess)
             elif guess != word:
@@ -51,7 +50,7 @@ def play(word):
             else:
                 guessed = True
                 word_completion = word
-        else:                                               #if user input otherthan words\letters
+        else:                                              
             print("Not a valid guess.")
         print(display_hangman(tries))
         print(word_completion)
@@ -68,7 +67,7 @@ def display_hangman(tries):
                    --------
                    |      |
                    |      O
-                   |     \\|/                       # double back slash means single slashrepresent escape character
+                   |     \\|/                      
                    |      |
                    |     / \\
                    -
@@ -137,7 +136,7 @@ def display_hangman(tries):
     return stages[tries]
 
 
-def main():                                                # play again input prompting play again
+def main():                                               
     word = get_word()
     play(word)
     while input("Play Again? (Y/N) ").upper() == "Y":
